@@ -228,7 +228,12 @@ export const faqs = [
   {
     question: 'Vou receber suporte?',
     answer:
-      'Sim. Além das calls, você conta com suporte da equipe e grupo de acompanhamento no WhatsApp para tirar dúvidas e avançar nas tarefas.',
+      'Sim. Além das calls, você conta com suporte da equipe e acesso anual ao grupo de acompanhamento no WhatsApp para tirar dúvidas e avançar nas tarefas.',
+  },
+  {
+    question: 'Quanto tempo dura o acesso ao grupo?',
+    answer:
+      'O acesso ao grupo de acompanhamento é anual: você permanece no grupo por 1 ano a partir da entrada na turma.',
   },
   {
     question: 'O cardápio digital e a ferramenta de IA estão inclusos?',
@@ -244,6 +249,11 @@ export const faqs = [
     question: 'Quanto tempo dura a mentoria?',
     answer:
       'A estrutura principal tem 6 calls coletivas, com tarefas entre os encontros. O calendário completo da turma será confirmado na abertura das inscrições.',
+  },
+  {
+    question: 'Qual é o investimento?',
+    answer:
+      'A mentoria custa 4x de R$ 255 ou R$ 998 à vista. O valor inclui a jornada completa e o acesso anual ao grupo de acompanhamento.',
   },
   {
     question: 'Por que entrar agora?',

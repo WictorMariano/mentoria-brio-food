@@ -140,12 +140,6 @@
   text-transform: uppercase;
 }
 
-.eyebrow > span {
-  width: 24px;
-  height: 1px;
-  background: currentColor;
-}
-
 .eyebrow--light {
   color: var(--sage);
 }
@@ -1085,7 +1079,7 @@
 .value-seal strong {
   color: var(--sage);
   font-family: var(--serif);
-  font-size: 2.25rem;
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
   font-weight: 500;
 }
 
@@ -1515,24 +1509,46 @@
 }
 
 .price-coming {
-  margin: 25px 0 18px;
+  margin: 22px 0 10px;
   color: rgba(255, 255, 255, 0.72);
   font-size: 0.8rem;
-  line-height: 1.15;
+  line-height: 1.05;
+}
+
+.price-installments {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--sage);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .price-coming strong {
   color: white;
   font-family: var(--serif);
-  font-size: 3.25rem;
+  font-size: 3.35rem;
   font-weight: 500;
   letter-spacing: -0.04em;
 }
 
+.price-cash {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+}
+
+.price-cash strong {
+  color: white;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+}
+
 .price-note {
   margin: 0 0 26px;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.74rem;
   line-height: 1.55;
 }
 

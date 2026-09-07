@@ -39,7 +39,7 @@ function SectionHeading({
 }) {
   return (
     <div className={`section-heading reveal ${light ? 'section-heading--light' : ''} ${center ? 'section-heading--center' : ''}`}>
-      <span className="eyebrow"><span />{eyebrow}</span>
+      <span className="eyebrow">{eyebrow}</span>
       <h2>{title}</h2>
       {description && <p>{description}</p>}
     </div>
@@ -354,7 +354,7 @@ function App() {
         <section className="value-banner">
           <div className="container value-banner-grid">
             <div className="value-copy reveal">
-              <span className="eyebrow eyebrow--light"><span />Por que a oferta é forte</span>
+              <span className="eyebrow eyebrow--light">Por que a oferta é forte</span>
               <h2>Mentoria + ferramentas + suporte. Tudo no mesmo lugar.</h2>
               <p>
                 Em vez de comprar curso, ferramenta e consultoria separados,
@@ -366,7 +366,7 @@ function App() {
               {[
                 ['06', 'Calls ao vivo'],
                 ['✓', 'Tarefas práticas'],
-                ['24/7', 'Grupo + suporte'],
+                ['1 ano', 'Acesso ao grupo'],
                 ['IA', 'Ferramentas inclusas'],
               ].map(([highlight, label]) => (
                 <div className="value-seal" key={label}>
@@ -391,7 +391,7 @@ function App() {
               </div>
             </div>
             <div className="mentor-content reveal">
-              <span className="eyebrow"><span />Quem vai te guiar</span>
+              <span className="eyebrow">Quem vai te guiar</span>
               <h2>Aprenda com quem construiu marca local na prática.</h2>
               <div className="mentor-name">
                 <div>
@@ -450,7 +450,7 @@ function App() {
             <div className="support-strip reveal">
               <div>
                 <Users size={22} />
-                <p><strong>Grupo no WhatsApp</strong>Troca, networking e incentivo durante a turma.</p>
+                <p><strong>Grupo no WhatsApp por 1 ano</strong>Acesso anual para networking, dúvidas e troca de experiências.</p>
               </div>
               <div>
                 <MessageCircle size={22} />
@@ -463,7 +463,7 @@ function App() {
         <section className="action-section section-pad">
           <div className="container action-grid">
             <div className="action-copy reveal">
-              <span className="eyebrow"><span />Oferta imperdível</span>
+              <span className="eyebrow">Oferta imperdível</span>
               <h2>Você não compra só informação. Compra direção para executar.</h2>
               <p>
                 Cada call vem com tarefa. Cada tarefa aproxima sua marca de mais desejo,
@@ -475,7 +475,7 @@ function App() {
               {[
                 '6 calls coletivas ao vivo',
                 'Tarefas práticas em cada etapa',
-                'Grupo de acompanhamento',
+                'Grupo de acompanhamento por 1 ano',
                 'Suporte da equipe',
                 'IA + criador de vídeo + cardápio digital',
                 'Plano de crescimento de 90 dias',
@@ -504,7 +504,7 @@ function App() {
                   {[
                     '6 calls coletivas ao vivo',
                     'Tarefas + suporte da equipe',
-                    'Grupo de acompanhamento',
+                    'Acesso anual ao grupo de acompanhamento',
                     'Produto, conteúdo, gestão e crescimento',
                     'IA, vídeo e cardápio digital inclusos',
                     'Google Meu Negócio + plano de 90 dias',
@@ -514,11 +514,14 @@ function App() {
                 </div>
               </div>
               <div className="price-card">
-                <span className="price-label">Condição especial da turma</span>
-                <p className="price-coming">Investimento<br /><strong>em breve</strong></p>
+                <span className="price-label">Investimento da mentoria</span>
+                <p className="price-coming">
+                  <span className="price-installments">4x de</span>
+                  <strong>R$ 255</strong>
+                </p>
+                <p className="price-cash">ou <strong>R$ 998</strong> à vista</p>
                 <p className="price-note">
-                  O valor e as condições serão divulgados na abertura oficial.
-                  Quem entrar agora garante acesso à oferta completa da turma.
+                  Inclui acesso anual ao grupo de acompanhamento — você fica no grupo por 1 ano.
                 </p>
                 <CtaLink variant="light">Quero entrar para a próxima turma</CtaLink>
                 <small><CheckCircle2 size={14} />Vagas limitadas para manter qualidade no acompanhamento.</small>
@@ -530,7 +533,7 @@ function App() {
         <section className="faq-section section-pad" id="faq">
           <div className="container faq-grid">
             <div className="faq-intro reveal">
-              <span className="eyebrow"><span />Dúvidas frequentes</span>
+              <span className="eyebrow">Dúvidas frequentes</span>
               <h2>Ainda tem alguma dúvida antes de garantir sua vaga?</h2>
               <p>Respostas diretas para você decidir com clareza.</p>
               <div className="faq-contact">
@@ -558,7 +561,7 @@ function App() {
         <section className="final-cta">
           <div className="container final-cta-inner reveal">
             <div>
-              <span className="eyebrow eyebrow--light"><span />Último passo</span>
+              <span className="eyebrow eyebrow--light">Último passo</span>
               <h2>Seu negócio pode continuar improvisando… ou pode virar uma marca desejada.</h2>
             </div>
             <CtaLink variant="light">Quero fazer parte da BrioFood</CtaLink>
