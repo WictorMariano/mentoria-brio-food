@@ -1,6 +1,6 @@
 export const siteConfig = {
   checkoutUrl: '#inscricao',
-  linkedinUrl: '#',
+  linkedinUrl: 'https://www.linkedin.com/in/celeste-lacerda-b640a719a/',
   instagramUrl: '#',
   supportEmail: 'contato@briofood.com.br',
 }
@@ -22,79 +22,188 @@ export type IconName =
   | 'repeat'
   | 'check'
 
+export type DeliverableDemoType =
+  | 'carrosseis'
+  | 'aprimoramento'
+  | 'videos'
+  | 'biblioteca'
+
+export type DeliverableAccordionItem = {
+  id: string
+  title: string
+  description: string
+  demoType: DeliverableDemoType
+  images?: Array<{ src: string; alt: string }>
+}
+
 export const deliverables: Array<{
   number: string
   icon: IconName
   title: string
+  titleAccent?: string
   description: string
   items: string[]
+  image?: string
+  imageAlt?: string
+  logo?: string
+  logoAlt?: string
+  images?: Array<{ src: string; alt: string }>
+  badge?: string
   featured?: boolean
+  variant?: 'split' | 'accordion'
+  accordionItems?: DeliverableAccordionItem[]
+  defaultOpenId?: string
+  partner?: {
+    name: string
+    logo: string
+    logoAlt: string
+    headline: string
+    text: string
+  }
 }> = [
   {
     number: '01',
-    icon: 'users',
-    title: '6 calls coletivas ao vivo',
+    icon: 'shoppingBag',
+    title: 'Site Cardápio Digital Delivery',
+    titleAccent: 'Sem depender de Aplicativos de terceiro.',
     description:
-      'Encontros práticos para você sair com direção clara: o que fazer, por que fazer e como aplicar no seu negócio ainda na mesma semana.',
-    items: ['Orientação estratégica', 'Espaço para dúvidas', 'Tarefas de implementação'],
+      'Seu próprio canal de pedidos: site + cardápio digital delivery para vender pelo Instagram, WhatsApp e Google — com mais margem e sem ficar refém de aplicativos de terceiros.',
+    items: ['Site do seu negócio', 'Cardápio digital delivery', 'Pedidos pelo seu canal'],
     featured: true,
+    partner: {
+      name: 'OrdemFlux',
+      logo: '/images/partners/ordemflux.png',
+      logoAlt: 'Logo OrdemFlux',
+      headline: '3 meses grátis incluso',
+      text:
+        'Os mentorados terão acesso à ferramenta OrdemFlux por 3 meses grátis. Depois, podem assinar o plano ou adquirir a ferramenta para sempre com uma compra única.',
+    },
+    images: [
+      {
+        src: '/images/cardapios-digitais/comida-japonesa.png',
+        alt: 'Exemplo de cardápio digital delivery para restaurante japonês',
+      },
+      {
+        src: '/images/cardapios-digitais/cardapio-acai.png',
+        alt: 'Exemplo de cardápio digital delivery para açaíteria',
+      },
+      {
+        src: '/images/cardapios-digitais/hamburgueria.png',
+        alt: 'Exemplo de cardápio digital delivery para hamburgueria',
+      },
+    ],
   },
   {
     number: '02',
-    icon: 'chart',
-    title: 'Gestão para lucrar de verdade',
+    icon: 'sparkles',
+    title: 'Base Épica',
+    titleAccent: 'Sistema exclusivo de geração de mídia.',
     description:
-      'Pare de olhar só o faturamento. Aprenda a enxergar margem, ticket, mix e o que realmente sobra no caixa no fim do mês.',
-    items: ['Margem e precificação', 'Ticket e recorrência', 'Decisões com números'],
+      'Um sistema que conhece o seu negócio e facilita carrosséis automáticos, artes profissionais sem cara de IA, aprimoramento de imagem e vídeos para alavancar suas redes.',
+    items: [
+      'Carrosséis automáticos',
+      'Aprimoramento de imagem',
+      'Vídeos',
+      'Biblioteca',
+    ],
+    variant: 'accordion',
+    defaultOpenId: 'carrosseis',
+    logo: '/images/base-epica/logotipo-base-epica.jpg',
+    logoAlt: 'Logotipo Base Épica',
+    image: '/images/base-epica/dashboard-hero.png',
+    imageAlt: 'Interface da Base Épica — sistema de geração de mídia para redes sociais',
+    accordionItems: [
+      {
+        id: 'carrosseis',
+        title: 'Carrosséis automáticos',
+        description: 'Escolha o template e a Base Épica monta a sequência pronta para publicar.',
+        demoType: 'carrosseis',
+        images: [
+          {
+            src: '/images/base-epica/template-carrossel.png',
+            alt: 'Template de carrossel promocional para açaíteria',
+          },
+        ],
+      },
+      {
+        id: 'aprimoramento',
+        title: 'Aprimoramento de imagem',
+        description: 'Eleve fotos de produto gastronômico com resultado profissional, sem visual genérico de IA.',
+        demoType: 'aprimoramento',
+        images: [
+          {
+            src: '/images/base-epica/gastro-antes.png',
+            alt: 'Antes — foto simples do sanduíche',
+          },
+          {
+            src: '/images/base-epica/gastro-depois.png',
+            alt: 'Depois — foto profissional com luz e apetite de anúncio',
+          },
+        ],
+      },
+      {
+        id: 'videos',
+        title: 'Vídeos para o seu negócio',
+        description: 'Gere vídeos curtos alinhados à sua marca para Reels, Stories e anúncios.',
+        demoType: 'videos',
+      },
+      {
+        id: 'biblioteca',
+        title: 'Biblioteca',
+        description: 'Referências prontas para inspirar e acelerar a criação de conteúdo.',
+        demoType: 'biblioteca',
+        images: [
+          { src: '/images/base-epica/biblioteca/ref-01.jpg', alt: 'Referência de arte 1' },
+          { src: '/images/base-epica/biblioteca/ref-02.jpg', alt: 'Referência de arte 2' },
+          { src: '/images/base-epica/biblioteca/ref-03.jpg', alt: 'Referência de arte 3' },
+          { src: '/images/base-epica/biblioteca/ref-04.jpg', alt: 'Referência de arte 4' },
+          { src: '/images/base-epica/biblioteca/ref-05.jpg', alt: 'Referência de arte 5' },
+          { src: '/images/base-epica/biblioteca/ref-06.jpg', alt: 'Referência de arte 6' },
+          { src: '/images/base-epica/biblioteca/ref-07.jpg', alt: 'Referência de arte 7' },
+          { src: '/images/base-epica/biblioteca/ref-08.jpg', alt: 'Referência de arte 8' },
+          { src: '/images/base-epica/biblioteca/ref-09.jpg', alt: 'Referência de arte 9' },
+          { src: '/images/base-epica/biblioteca/ref-10.jpg', alt: 'Referência de arte 10' },
+          { src: '/images/base-epica/biblioteca/ref-11.jpg', alt: 'Referência de arte 11' },
+          { src: '/images/base-epica/biblioteca/ref-12.jpg', alt: 'Referência de arte 12' },
+          { src: '/images/base-epica/biblioteca/ref-13.jpg', alt: 'Referência de arte 13' },
+        ],
+      },
+    ],
   },
   {
     number: '03',
-    icon: 'sparkles',
-    title: 'Conteúdo que gera desejo e venda',
-    description:
-      'Stories, Reels e bastidores com intenção: não para “aparecer”, mas para atrair, aquecer e vender todos os dias.',
-    items: ['Story Copy', 'Reels orgânicos', 'Prova social e lançamento'],
-    featured: true,
-  },
-  {
-    number: '04',
-    icon: 'trending',
-    title: 'Crescimento e buzz local',
-    description:
-      'Ações para sua marca ser comentada, indicada e procurada na região — com lançamentos, comunidade e parcerias.',
-    items: ['Lançamentos estratégicos', 'Microinfluenciadores', 'Comunidade e recompra'],
-  },
-  {
-    number: '05',
-    icon: 'bot',
-    title: 'Ferramenta com IA para redes',
-    description:
-      'Acelere ideias, roteiros e organização de posts para manter frequência sem viver no improviso.',
-    items: ['Ideias prontas para usar', 'Roteiros de vídeos', 'Planejamento da semana'],
-  },
-  {
-    number: '06',
-    icon: 'video',
-    title: 'Criador de vídeo incluso',
-    description:
-      'Facilite a produção de Reels e Stories e mantenha o negócio ativo nas redes sem travar na execução.',
-    items: ['Produção mais rápida', 'Formatos que performam', 'Rotina de conteúdo'],
-  },
-  {
-    number: '07',
-    icon: 'shoppingBag',
-    title: 'Cardápio digital próprio',
-    description:
-      'Venda direto pelo seu link no Instagram, WhatsApp e Google — com mais autonomia e menos dependência do iFood.',
-    items: ['Canal próprio de pedidos', 'Mais margem por venda', 'Relacionamento direto'],
-  },
-  {
-    number: '08',
     icon: 'mapPin',
-    title: 'Google Meu Negócio e presença local',
+    title: 'Google Meu Negócio Pro',
     description:
-      'Configure sua presença para quem pesquisa perto de você te encontrar, confiar e escolher o seu estabelecimento.',
-    items: ['Busca e Maps', 'Perfil profissional', 'Mais confiança local'],
+      'Os participantes recebem suporte para configurar o Google Meu Negócio da forma correta — e serem encontrados com mais facilidade por quem pesquisa perto de você.',
+    items: [
+      'Configuração correta do perfil',
+      'Mais chances de ser encontrado no Google',
+      'Suporte para deixar sua presença local profissional',
+    ],
+    image: '/images/google-meu-negocio/cartao-google.png',
+    imageAlt: 'Google Meu Negócio Pro — configuração profissional para ser encontrado',
+  },
+]
+
+export const menuDeliverySteps = [
+  {
+    number: '01',
+    title: 'Crie seu cardápio',
+    description: 'Cadastre produtos, preços e adicionais em poucos minutos.',
+    tone: 'menu' as const,
+  },
+  {
+    number: '02',
+    title: 'Envie o link',
+    description: 'Coloque na bio, status ou envie direto no WhatsApp.',
+    tone: 'share' as const,
+  },
+  {
+    number: '03',
+    title: 'Receba pedidos organizados',
+    description: 'Pedido chega no WhatsApp e no painel do restaurante.',
+    tone: 'orders' as const,
   },
 ]
 
@@ -236,9 +345,9 @@ export const faqs = [
       'O acesso ao grupo de acompanhamento é anual: você permanece no grupo por 1 ano a partir da entrada na turma.',
   },
   {
-    question: 'O cardápio digital e a ferramenta de IA estão inclusos?',
+    question: 'O cardápio digital e a Base Épica estão inclusos?',
     answer:
-      'Sim. A oferta inclui cardápio digital para pedidos próprios e ferramenta com IA para acelerar a criação de conteúdo.',
+      'Sim. A oferta inclui o site cardápio digital delivery e acesso à Base Épica — a ferramenta de geração de mídia para carrosséis, artes, aprimoramento de imagem e vídeos.',
   },
   {
     question: 'A mentoria ensina tráfego pago?',

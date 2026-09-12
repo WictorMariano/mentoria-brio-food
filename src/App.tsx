@@ -1,13 +1,16 @@
 import { useEffect, type ComponentType, type ReactNode } from 'react'
 import {
-  ArrowDown, ArrowRight, BarChart3, Bot, BriefcaseBusiness, Calculator, Camera,
-  Check, CheckCircle2, ChevronDown, CircleX, Compass, Heart, Leaf, MapPin,
-  MessageCircle, PackageCheck, ReceiptText, Repeat2, Search, ShoppingBag,
-  Sparkles, Store, TrendingUp, Users, Video, WalletCards, X, type LucideProps,
+  ArrowDown, ArrowRight, BarChart3, Bike, Bot, BriefcaseBusiness, Calculator, Camera,
+  Check, CheckCircle2, ChevronDown, CircleX, Compass, Heart, Leaf, Lightbulb, Link2, MapPin,
+  MessageCircle, PackageCheck, QrCode, ReceiptText, Repeat2, Search, Share2, ShoppingBag, Smartphone,
+  Sparkles, Star, Store, Target, TrendingUp, Users, Video, WalletCards, X, type LucideProps,
 } from 'lucide-react'
 import {
-  benefits, calls, deliverables, faqs, idealBusinesses, siteConfig, type IconName,
+  benefits, calls, deliverables, faqs, idealBusinesses, menuDeliverySteps, siteConfig, type IconName,
 } from './data/content'
+import { HeroPhotoMarquee } from './components/HeroPhotoMarquee'
+import { DeliverableImageCarousel } from './components/DeliverableImageCarousel'
+import { BaseEpicaAccordion } from './components/BaseEpicaAccordion'
 import './App.css'
 
 const icons: Record<IconName, ComponentType<LucideProps>> = {
@@ -91,8 +94,8 @@ function App() {
     <div className="site-shell">
       <main>
         <section className="hero-section" id="inicio">
-          <div className="container hero-grid">
-            <div className="hero-copy reveal">
+          <div className="hero-shell">
+            <div className="hero-copy">
               <a href="#inicio" className="hero-brand" aria-label="BrioFood — início">
                 <img src="/briofood-logo.svg" alt="BrioFood" />
               </a>
@@ -119,28 +122,21 @@ function App() {
               </div>
               <div className="hero-proof">
                 <div className="proof-avatar">
-                  <img src="/images/mentora-placeholder.png" alt="" />
+                  <img src="/images/celeste-hero.jpg" alt="" />
                 </div>
                 <p>
                   Com <strong>Celeste Lacerda</strong>
                   <span>Fundadora do Tazza e da Agência Brio 360</span>
                 </p>
               </div>
+
+              <div className="hero-marquee-mobile">
+                <HeroPhotoMarquee />
+              </div>
             </div>
 
-            <div className="hero-visual reveal">
-              <div className="hero-image-frame">
-                <img src="/images/mentora-placeholder.png" alt="Celeste Lacerda em um ambiente de cafeteria" />
-                <div className="image-tint" />
-              </div>
-              <div className="floating-card floating-card--top">
-                <span className="floating-icon"><TrendingUp size={17} /></span>
-                <div><strong>Mais movimento</strong><small>Conteúdo que vende</small></div>
-              </div>
-              <div className="floating-card floating-card--bottom">
-                <div className="mini-chart" aria-hidden="true"><i /><i /><i /><i /></div>
-                <div><strong>Mais lucro</strong><small>Margem e recorrência</small></div>
-              </div>
+            <div className="hero-visual-desktop">
+              <HeroPhotoMarquee className="hero-photo-marquee--fill" />
             </div>
           </div>
 
@@ -153,90 +149,171 @@ function App() {
           </div>
         </section>
 
-        <section className="problem-section section-pad">
-          <div className="container problem-grid">
-            <div>
-              <SectionHeading
-                eyebrow="Se você se reconhece nisso"
-                title="Seu produto é bom. O problema é que quase ninguém sente desejo de comprar de você."
-              />
-              <div className="problem-image reveal">
-                <img src="/images/gastronomia-briofood.png" alt="Produtos gastronômicos sendo preparados para criação de conteúdo" />
-                <div className="image-caption"><Sparkles size={16} />Bom produto precisa de marca</div>
-              </div>
-            </div>
-            <div className="problem-content reveal">
-              <p className="large-copy">
-                Muitos negócios de alimentação trabalham o dia inteiro, postam nas redes,
-                abrem o delivery… e ainda assim vivem no improviso.
-              </p>
+        <section className="problem-section" id="reconhecimento">
+          <div className="problem-backdrop" aria-hidden="true">
+            <img src="/images/problem-backdrop.png" alt="" />
+          </div>
+          <div className="container problem-wrap">
+            <div className="problem-header reveal">
+              <span className="problem-kicker">Se Você Se Reconhece Nisso</span>
+              <h2>
+                Seu negócio não precisa de mais improviso.{' '}
+                <em>Precisa de direção.</em>
+              </h2>
               <p>
-                Não falta esforço. Falta método para criar desejo, comunicar valor,
-                lançar novidades e transformar presença digital em movimento real.
+                A Mentoria BrioFood foi criada para donos de negócios locais de alimentação
+                que querem sair do achismo e construir uma marca desejada, com método,
+                conteúdo, gestão e execução.
               </p>
-              <div className="pain-list">
-                {[
-                  'Posta todo dia, mas quase não gera venda',
-                  'Depende demais do iFood ou do boca a boca',
-                  'Não sabe o que lançar nem como lançar',
-                  'Tem um ótimo produto, mas pouca gente conhece',
-                  'Não sabe quanto realmente lucra em cada item',
-                  'Não tem comunidade, recorrência nem buzz local',
-                ].map((pain) => (
-                  <div key={pain}><span><ArrowRight size={15} /></span>{pain}</div>
-                ))}
-              </div>
+            </div>
+
+            <div className="problem-cards reveal">
+              <article className="problem-card problem-card--pain">
+                <span className="problem-card__label">Realidade de muitos negócios locais</span>
+                <h3>O que costuma travar o crescimento</h3>
+                <ul>
+                  {[
+                    {
+                      icon: Smartphone,
+                      title: 'Você posta todo dia… e quase não gera venda?',
+                      text: 'Sua comunicação aparece, mas não cria desejo nem movimento.',
+                    },
+                    {
+                      icon: Bike,
+                      title: 'Depende demais do iFood ou do boca a boca?',
+                      text: 'Seu negócio fica vulnerável e sem controle sobre a demanda.',
+                    },
+                    {
+                      icon: Lightbulb,
+                      title: 'Não sabe o que lançar — nem como lançar?',
+                      text: 'Novidades saem sem estratégia, sem campanha e sem resultado.',
+                    },
+                    {
+                      icon: Star,
+                      title: 'Tem um ótimo produto, mas pouca gente conhece?',
+                      text: 'Qualidade sozinha não basta se a marca não é lembrada.',
+                    },
+                    {
+                      icon: BarChart3,
+                      title: 'Não sabe quanto realmente lucra em cada item?',
+                      text: 'Você vende, fatura… e ainda assim não enxerga a margem.',
+                    },
+                    {
+                      icon: Users,
+                      title: 'Ainda não tem comunidade, recorrência nem buzz local?',
+                      text: 'Clientes passam, mas não voltam nem indicam com força.',
+                    },
+                  ].map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <li key={item.title}>
+                        <span><Icon size={18} /></span>
+                        <div>
+                          <strong>{item.title}</strong>
+                          <p>{item.text}</p>
+                        </div>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </article>
+
+              <article className="problem-card problem-card--solution">
+                <span className="problem-card__label">Com a mentoria, você tem</span>
+                <h3>Estratégia prática para transformar o seu negócio</h3>
+                <p className="problem-card__lead">
+                  Eu passei anos estudando e aplicando marketing na vida real —
+                  observando o que funciona nas grandes operações e validando cada
+                  decisão no meu próprio negócio, o Tazza. Foi assim que desenvolvi
+                  uma estratégia feita para negócios locais de alimentação.
+                </p>
+                <p className="problem-card__promise">
+                  Uma estratégia que pode ser aplicada em qualquer negócio local
+                  e gerar resultados de crescimento de <strong>3x a 10x</strong>.
+                </p>
+                <div className="problem-pillars">
+                  {[
+                    { icon: Target, title: 'Mais clareza', text: 'Saiba o que priorizar agora.' },
+                    { icon: TrendingUp, title: 'Mais intenção', text: 'Conteúdo e oferta que vendem.' },
+                    { icon: Users, title: 'Mais resultado', text: 'Movimento, margem e marca.' },
+                  ].map((pillar) => {
+                    const Icon = pillar.icon
+                    return (
+                      <div key={pillar.title}>
+                        <Icon size={20} />
+                        <strong>{pillar.title}</strong>
+                        <p>{pillar.text}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+                <CtaLink className="problem-card__cta">Quero aplicar essa estratégia</CtaLink>
+                <small className="problem-card__foot">Gastronomia local. Mais que comida, negócios reais.</small>
+              </article>
             </div>
           </div>
         </section>
 
-        <section className="profit-section section-pad">
-          <div className="container">
-            <SectionHeading
-              eyebrow="Gestão financeira na prática"
-              title="Você pode vender mais — e também lucrar melhor com o que já vende."
-              description="A BrioFood não fala só de marketing. Você também aprende a olhar os números que mostram se o movimento do negócio está virando dinheiro de verdade."
-              light
-            />
-            <div className="profit-grid">
+        <section className="method-section section-pad" id="metodo">
+          <div className="container method-shell reveal">
+            <div className="method-copy">
+              <span className="eyebrow">Meu método à sua disposição</span>
+              <h2>O simples bem feito ainda funciona. E eu vou te mostrar como.</h2>
+              <p className="method-lead">
+                Não é sobre complicar. É sobre fazer as pequenas coisas certas —
+                aquelas que, juntas, geram grandes resultados no seu negócio local.
+              </p>
+              <p>
+                Vamos fazer isso juntos, em um grupo fechado e seleto no WhatsApp,
+                com reuniões quinzenais analisando o seu negócio ponto a ponto e
+                implementando o método que eu adaptei de grandes empresas para a
+                minha própria operação.
+              </p>
+              <p>
+                Além disso, você recebe uma infraestrutura digital para levar o
+                negócio a outro patamar e se destacar dos demais.
+              </p>
+              <p className="method-highlight">
+                Vamos achar o que torna o seu negócio único — e mostrar que
+                <strong> não existe concorrência</strong> quando você se posiciona
+                da maneira certa.
+              </p>
+              <CtaLink>Quero me inscrever na mentoria</CtaLink>
+            </div>
+            <div className="method-points">
               {[
                 {
-                  icon: Calculator,
-                  title: 'Precificar com margem',
-                  text: 'Entenda custo, percepção de valor e preço justo para não vender muito e sobrar pouco.',
+                  icon: MessageCircle,
+                  title: 'Grupo fechado no WhatsApp',
+                  text: 'Uma comunidade seleta para acompanhar, trocar e avançar com suporte.',
                 },
                 {
-                  icon: WalletCards,
-                  title: 'Aumentar ticket médio',
-                  text: 'Crie combos, complementos e ofertas que elevam o valor de cada pedido.',
+                  icon: Users,
+                  title: 'Reuniões quinzenais',
+                  text: 'Análise do seu negócio ponto a ponto, com direção prática para implementar.',
                 },
                 {
-                  icon: PackageCheck,
-                  title: 'Focar no mix certo',
-                  text: 'Descubra o que atrai, o que lucra e o que só ocupa operação sem retorno.',
+                  icon: Target,
+                  title: 'Método validado na prática',
+                  text: 'Estratégias adaptadas de grandes empresas para a realidade da operação local.',
                 },
                 {
-                  icon: ReceiptText,
-                  title: 'Gerar recorrência',
-                  text: 'Faça o cliente voltar mais vezes e acompanhe indicadores simples de resultado.',
+                  icon: Sparkles,
+                  title: 'Infraestrutura digital',
+                  text: 'Ferramentas e estrutura para destacar sua marca e acelerar o crescimento.',
                 },
               ].map((item) => {
                 const Icon = item.icon
                 return (
-                  <article className="profit-card reveal" key={item.title}>
-                    <span className="profit-icon"><Icon size={22} /></span>
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
+                  <article key={item.title}>
+                    <span><Icon size={20} /></span>
+                    <div>
+                      <strong>{item.title}</strong>
+                      <p>{item.text}</p>
+                    </div>
                   </article>
                 )
               })}
-            </div>
-            <div className="profit-bottom reveal">
-              <TrendingUp size={22} />
-              <p>
-                <strong>O segredo não é só faturar mais.</strong>
-                {' '}É fazer cada venda, cada post e cada lançamento render mais.
-              </p>
             </div>
           </div>
         </section>
@@ -244,30 +321,226 @@ function App() {
         <section className="offer-section section-pad" id="mentoria">
           <div className="container">
             <SectionHeading
-              eyebrow="O que você leva"
-              title="Não é só mentoria. É um pacote completo para sair do improviso."
-              description="Calls ao vivo, tarefas práticas, suporte, ferramentas digitais e plano de crescimento — tudo para você aplicar no seu negócio de alimentação."
+              eyebrow="O que você vai levar"
+              title="Um pacote completo para colocar seu negócio à frente do que há de mais novo."
+              description="Minha equipe tech vai te entregar as ferramentas mais vantajosas para você criar conteúdo, ter o seu próprio site delivery, ser encontrado e recomendado no Google — e muito mais. Confira."
               center
             />
-            <div className="deliverables-grid">
-              {deliverables.map((item) => {
+            <div className="deliverables-stack">
+              {deliverables.map((item, index) => {
                 const Icon = icons[item.icon]
+                const isAlt = (index - 1) % 2 === 1
+                const isFeature = Boolean(item.featured && item.images?.length)
+                const isAccordion = item.variant === 'accordion' && Boolean(item.accordionItems?.length)
+
+                if (isAccordion) {
+                  return (
+                    <article className="deliverable-card deliverable-card--accordion reveal" key={item.number}>
+                      <div className="deliverable-accordion-top">
+                        <div className="deliverable-copy">
+                          <span className="epica-kicker">Ferramenta inclusa</span>
+                          <h3>
+                            {item.logo ? (
+                              <span className="epica-title-brand">
+                                <img src={item.logo} alt={item.logoAlt ?? item.title} />
+                                <span>{item.title}</span>
+                              </span>
+                            ) : (
+                              item.title
+                            )}
+                            {item.titleAccent ? (
+                              <>
+                                {' '}
+                                <em>{item.titleAccent}</em>
+                              </>
+                            ) : null}
+                          </h3>
+                          <p>{item.description}</p>
+                          <div className="epica-pill-row">
+                            {item.items.map((detail) => (
+                              <span key={detail}>{detail}</span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="deliverable-accordion-visual">
+                          <img
+                            src={item.image}
+                            alt={item.imageAlt}
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                      <BaseEpicaAccordion
+                        items={item.accordionItems!}
+                        defaultOpenId={item.defaultOpenId ?? item.accordionItems![0].id}
+                      />
+                    </article>
+                  )
+                }
+
+                if (isFeature) {
+                  return (
+                    <div className="deliverable-feature-block" key={item.number}>
+                      <article className="deliverable-card deliverable-card--feature reveal">
+                        <div className="deliverable-copy">
+                          <div className="card-topline">
+                            <span className="card-icon"><Icon size={22} /></span>
+                          </div>
+                          <h3>
+                            {item.title}
+                            {item.titleAccent ? (
+                              <>
+                                {' '}
+                                <em>{item.titleAccent}</em>
+                              </>
+                            ) : null}
+                          </h3>
+                          <p>{item.description}</p>
+                          <ul>
+                            {item.items.map((detail) => (
+                              <li key={detail}><Check size={14} strokeWidth={3} />{detail}</li>
+                            ))}
+                          </ul>
+                          {item.partner ? (
+                            <aside className="partner-strip">
+                              <img src={item.partner.logo} alt={item.partner.logoAlt} />
+                              <div>
+                                <strong>{item.partner.headline}</strong>
+                                <p>{item.partner.text}</p>
+                              </div>
+                            </aside>
+                          ) : null}
+                        </div>
+                        <div className="deliverable-media deliverable-media--carousel">
+                          <DeliverableImageCarousel images={item.images!} />
+                        </div>
+                      </article>
+
+                      <div className="menu-steps reveal">
+                        <div className="menu-steps__heading">
+                          <h4>
+                            Comece a receber pedidos em{' '}
+                            <em>3 passos simples</em>
+                          </h4>
+                          <p>Configure uma vez, receba pedidos para sempre. Sem complicação, sem burocracia.</p>
+                        </div>
+
+                        <div className="menu-steps__flow">
+                          {menuDeliverySteps.map((step, stepIndex) => (
+                            <div className="menu-step-wrap" key={step.number}>
+                              <article className={`menu-step menu-step--${step.tone}`}>
+                                <span className="menu-step__number">{step.number}</span>
+                                <div className="menu-step__preview" aria-hidden="true">
+                                  {step.tone === 'menu' ? (
+                                    <div className="menu-preview">
+                                      <div className="menu-preview__search">Buscar no cardápio...</div>
+                                      <div className="menu-preview__tags">
+                                        <span className="is-active">Destaques</span>
+                                        <span>Combos</span>
+                                        <span>Pizzas</span>
+                                      </div>
+                                      <div className="menu-preview__item">
+                                        <span />
+                                        <div>
+                                          <strong>Combo Burger</strong>
+                                          <small>R$ 34,90</small>
+                                        </div>
+                                        <button type="button">+</button>
+                                      </div>
+                                    </div>
+                                  ) : null}
+                                  {step.tone === 'share' ? (
+                                    <div className="share-preview">
+                                      <p>seucardapio.com/seu-negocio</p>
+                                      <div className="share-preview__qr"><QrCode size={54} strokeWidth={1.5} /></div>
+                                      <span className="share-preview__btn"><Share2 size={16} /><Link2 size={16} /></span>
+                                    </div>
+                                  ) : null}
+                                  {step.tone === 'orders' ? (
+                                    <div className="orders-preview">
+                                      {[
+                                        ['Lucas O.', 'Novo', 'R$ 55,70'],
+                                        ['Mariana S.', 'Em preparo', 'R$ 42,00'],
+                                        ['Pedro H.', 'Pronto', 'R$ 31,90'],
+                                      ].map(([name, status, price]) => (
+                                        <div key={name}>
+                                          <strong>{name}</strong>
+                                          <span data-status={status}>{status}</span>
+                                          <small>{price}</small>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  ) : null}
+                                </div>
+                                <h5>{step.title}</h5>
+                                <p>{step.description}</p>
+                              </article>
+                              {stepIndex < menuDeliverySteps.length - 1 ? (
+                                <span className="menu-step__arrow" aria-hidden="true"><ArrowRight size={18} /></span>
+                              ) : null}
+                            </div>
+                          ))}
+
+                          <aside className="menu-steps__phone" aria-label="Exemplo de pedido no WhatsApp">
+                            <div className="wa-phone">
+                              <div className="wa-phone__notch" />
+                              <div className="wa-phone__screen">
+                                <div className="wa-phone__header">
+                                  <strong>Seu Negócio</strong>
+                                  <small>online</small>
+                                </div>
+                                <div className="wa-phone__chat">
+                                  <div className="wa-bubble">
+                                    <p><strong>Novo pedido</strong></p>
+                                    <p>1x Combo Burger</p>
+                                    <p>1x Batata Frita</p>
+                                    <p>1x Coca 350ml</p>
+                                    <p><strong>Total R$ 55,70</strong></p>
+                                  </div>
+                                  <div className="wa-bubble wa-bubble--ok">
+                                    <CheckCircle2 size={14} /> Pedido recebido com sucesso!
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </aside>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+
                 return (
                   <article
-                    className={`deliverable-card reveal ${item.featured ? 'deliverable-card--featured' : ''}`}
+                    className={`deliverable-card deliverable-card--compact reveal ${isAlt ? 'deliverable-card--alt' : ''} ${item.badge ? 'deliverable-card--bonus' : ''}`}
                     key={item.number}
                   >
-                    <div className="card-topline">
-                      <span className="card-icon"><Icon size={22} /></span>
-                      <span className="card-number">{item.number}</span>
+                    <div className="deliverable-copy">
+                      <div className="card-topline">
+                        <span className="card-icon"><Icon size={22} /></span>
+                        {item.badge ? (
+                          <span className="card-badge">{item.badge}</span>
+                        ) : null}
+                      </div>
+                      <h3>
+                        {item.title}
+                        {item.titleAccent ? (
+                          <>
+                            {' '}
+                            <em>{item.titleAccent}</em>
+                          </>
+                        ) : null}
+                      </h3>
+                      <p>{item.description}</p>
+                      <ul>
+                        {item.items.map((detail) => (
+                          <li key={detail}><Check size={14} strokeWidth={3} />{detail}</li>
+                        ))}
+                      </ul>
                     </div>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                    <ul>
-                      {item.items.map((detail) => (
-                        <li key={detail}><Check size={14} strokeWidth={3} />{detail}</li>
-                      ))}
-                    </ul>
+                    <div className="deliverable-media">
+                      <img src={item.image} alt={item.imageAlt} loading="lazy" />
+                    </div>
                   </article>
                 )
               })}
@@ -351,29 +624,54 @@ function App() {
           </div>
         </section>
 
-        <section className="value-banner">
-          <div className="container value-banner-grid">
-            <div className="value-copy reveal">
-              <span className="eyebrow eyebrow--light">Por que a oferta é forte</span>
-              <h2>Mentoria + ferramentas + suporte. Tudo no mesmo lugar.</h2>
-              <p>
-                Em vez de comprar curso, ferramenta e consultoria separados,
-                você recebe uma jornada prática para aplicar no seu negócio de alimentação.
-              </p>
-              <CtaLink variant="light">Quero entrar na próxima turma</CtaLink>
-            </div>
-            <div className="value-seals reveal">
+        <section className="profit-section section-pad" id="bonus-financeiro">
+          <div className="container">
+            <div className="bonus-badge reveal">Bônus incluso</div>
+            <SectionHeading
+              eyebrow="Gestão financeira na prática"
+              title="Você pode vender mais — e também lucrar melhor com o que já vende."
+              description="Como bônus da mentoria, você também aprende a olhar os números que mostram se o movimento do negócio está virando dinheiro de verdade."
+              light
+            />
+            <div className="profit-grid">
               {[
-                ['06', 'Calls ao vivo'],
-                ['✓', 'Tarefas práticas'],
-                ['1 ano', 'Acesso ao grupo'],
-                ['IA', 'Ferramentas inclusas'],
-              ].map(([highlight, label]) => (
-                <div className="value-seal" key={label}>
-                  <strong>{highlight}</strong>
-                  <span>{label}</span>
-                </div>
-              ))}
+                {
+                  icon: Calculator,
+                  title: 'Precificar com margem',
+                  text: 'Entenda custo, percepção de valor e preço justo para não vender muito e sobrar pouco.',
+                },
+                {
+                  icon: WalletCards,
+                  title: 'Aumentar ticket médio',
+                  text: 'Crie combos, complementos e ofertas que elevam o valor de cada pedido.',
+                },
+                {
+                  icon: PackageCheck,
+                  title: 'Focar no mix certo',
+                  text: 'Descubra o que atrai, o que lucra e o que só ocupa operação sem retorno.',
+                },
+                {
+                  icon: ReceiptText,
+                  title: 'Gerar recorrência',
+                  text: 'Faça o cliente voltar mais vezes e acompanhe indicadores simples de resultado.',
+                },
+              ].map((item) => {
+                const Icon = item.icon
+                return (
+                  <article className="profit-card reveal" key={item.title}>
+                    <span className="profit-icon"><Icon size={22} /></span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                )
+              })}
+            </div>
+            <div className="profit-bottom reveal">
+              <TrendingUp size={22} />
+              <p>
+                <strong>O segredo não é só faturar mais.</strong>
+                {' '}É fazer cada venda, cada post e cada lançamento render mais.
+              </p>
             </div>
           </div>
         </section>
@@ -382,12 +680,7 @@ function App() {
           <div className="container mentor-grid">
             <div className="mentor-visual reveal">
               <div className="mentor-image">
-                <img src="/images/mentora-placeholder.png" alt="Retrato de Celeste Lacerda, mentora da BrioFood" />
-              </div>
-              <div className="mentor-card">
-                <small>Experiência real</small>
-                <strong>Tazza <span>+</span> Brio 360</strong>
-                <p>Quem vive o desafio de transformar comida em marca.</p>
+                <img src="/images/celeste-mentor.png" alt="Celeste Lacerda com croissant do Tazza" />
               </div>
             </div>
             <div className="mentor-content reveal">
@@ -398,7 +691,12 @@ function App() {
                   <strong>Celeste Lacerda</strong>
                   <span>Fundadora do Tazza e da Agência Brio 360</span>
                 </div>
-                <a href={siteConfig.linkedinUrl} aria-label="LinkedIn de Celeste Lacerda">
+                <a
+                  href={siteConfig.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn de Celeste Lacerda"
+                >
                   <BriefcaseBusiness size={19} />
                 </a>
               </div>
@@ -414,6 +712,46 @@ function App() {
                 “Você vai aprender com uma empreendedora que vive o desafio real
                 de transformar um bom produto em uma marca que as pessoas procuram.”
               </blockquote>
+            </div>
+          </div>
+        </section>
+
+        <section className="pricing-section section-pad" id="inscricao">
+          <div className="container">
+            <div className="pricing-shell reveal">
+              <div className="pricing-copy">
+                <span className="pill pill--cream">Próxima turma · vagas limitadas</span>
+                <h2>Entre agora e saia do improviso de uma vez.</h2>
+                <p>
+                  Mentoria com Celeste Lacerda, ferramentas digitais e suporte para
+                  transformar seu negócio de alimentação em uma marca local desejada.
+                </p>
+                <div className="pricing-list">
+                  {[
+                    '6 calls coletivas ao vivo',
+                    'Tarefas + suporte da equipe',
+                    'Acesso anual ao grupo de acompanhamento',
+                    'Site e cardápio digital delivery',
+                    'Base Épica para redes sociais',
+                    'Google Meu Negócio Pro incluso',
+                  ].map((item) => (
+                    <span key={item}><Check size={15} strokeWidth={3} />{item}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="price-card">
+                <span className="price-label">Investimento da mentoria</span>
+                <p className="price-coming">
+                  <span className="price-installments">4x de</span>
+                  <strong>R$ 255</strong>
+                </p>
+                <p className="price-cash">ou <strong>R$ 998</strong> à vista</p>
+                <p className="price-note">
+                  Inclui acesso anual ao grupo de acompanhamento — você fica no grupo por 1 ano.
+                </p>
+                <CtaLink variant="light">Quero entrar para a próxima turma</CtaLink>
+                <small><CheckCircle2 size={14} />Vagas limitadas para manter qualidade no acompanhamento.</small>
+              </div>
             </div>
           </div>
         </section>
@@ -477,8 +815,8 @@ function App() {
                 'Tarefas práticas em cada etapa',
                 'Grupo de acompanhamento por 1 ano',
                 'Suporte da equipe',
-                'IA + criador de vídeo + cardápio digital',
-                'Plano de crescimento de 90 dias',
+                'Site, cardápio e Base Épica',
+                'Google Meu Negócio Pro',
               ].map((item, index) => (
                 <div key={item}>
                   <span>{String(index + 1).padStart(2, '0')}</span>
@@ -486,46 +824,6 @@ function App() {
                   <Check size={18} />
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="pricing-section section-pad" id="inscricao">
-          <div className="container">
-            <div className="pricing-shell reveal">
-              <div className="pricing-copy">
-                <span className="pill pill--cream">Próxima turma · vagas limitadas</span>
-                <h2>Entre agora e saia do improviso de uma vez.</h2>
-                <p>
-                  Mentoria com Celeste Lacerda, ferramentas digitais e suporte para
-                  transformar seu negócio de alimentação em uma marca local desejada.
-                </p>
-                <div className="pricing-list">
-                  {[
-                    '6 calls coletivas ao vivo',
-                    'Tarefas + suporte da equipe',
-                    'Acesso anual ao grupo de acompanhamento',
-                    'Produto, conteúdo, gestão e crescimento',
-                    'IA, vídeo e cardápio digital inclusos',
-                    'Google Meu Negócio + plano de 90 dias',
-                  ].map((item) => (
-                    <span key={item}><Check size={15} strokeWidth={3} />{item}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="price-card">
-                <span className="price-label">Investimento da mentoria</span>
-                <p className="price-coming">
-                  <span className="price-installments">4x de</span>
-                  <strong>R$ 255</strong>
-                </p>
-                <p className="price-cash">ou <strong>R$ 998</strong> à vista</p>
-                <p className="price-note">
-                  Inclui acesso anual ao grupo de acompanhamento — você fica no grupo por 1 ano.
-                </p>
-                <CtaLink variant="light">Quero entrar para a próxima turma</CtaLink>
-                <small><CheckCircle2 size={14} />Vagas limitadas para manter qualidade no acompanhamento.</small>
-              </div>
             </div>
           </div>
         </section>
