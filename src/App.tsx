@@ -10,7 +10,8 @@ import {
 } from './data/content'
 import { HeroPhotoMarquee } from './components/HeroPhotoMarquee'
 import { DeliverableImageCarousel } from './components/DeliverableImageCarousel'
-import { BaseEpicaAccordion } from './components/BaseEpicaAccordion'
+import { GallerySection } from './components/GallerySection'
+import { BaseEpicaFeatures } from './components/BaseEpicaFeatures'
 import './App.css'
 
 const icons: Record<IconName, ComponentType<LucideProps>> = {
@@ -96,10 +97,10 @@ function App() {
         <section className="hero-section" id="inicio">
           <div className="hero-shell">
             <div className="hero-copy">
-              <a href="#inicio" className="hero-brand" aria-label="BrioFood — início">
+              <a href="#inicio" className="hero-brand" aria-label="BrioFood: início">
                 <img src="/briofood-logo.svg" alt="BrioFood" />
               </a>
-              <p className="hero-kicker">Mentoria em grupo para negócios locais de alimentação</p>
+              <p className="hero-kicker">Mentoria Para Negócios Locais Alimentícios</p>
               <h1>
                 Transforme seu negócio de comida em uma marca local que vende mais e lucra melhor.
               </h1>
@@ -119,15 +120,6 @@ function App() {
                 <span className="pill">6 calls ao vivo</span>
                 <span className="pill">Ferramentas inclusas</span>
                 <span className="pill">Suporte da equipe</span>
-              </div>
-              <div className="hero-proof">
-                <div className="proof-avatar">
-                  <img src="/images/celeste-hero.jpg" alt="" />
-                </div>
-                <p>
-                  Com <strong>Celeste Lacerda</strong>
-                  <span>Fundadora do Tazza e da Agência Brio 360</span>
-                </p>
               </div>
 
               <div className="hero-marquee-mobile">
@@ -185,7 +177,7 @@ function App() {
                     },
                     {
                       icon: Lightbulb,
-                      title: 'Não sabe o que lançar — nem como lançar?',
+                      title: 'Não sabe o que lançar, nem como lançar?',
                       text: 'Novidades saem sem estratégia, sem campanha e sem resultado.',
                     },
                     {
@@ -222,7 +214,7 @@ function App() {
                 <span className="problem-card__label">Com a mentoria, você tem</span>
                 <h3>Estratégia prática para transformar o seu negócio</h3>
                 <p className="problem-card__lead">
-                  Eu passei anos estudando e aplicando marketing na vida real —
+                  Eu passei anos estudando e aplicando marketing na vida real.
                   observando o que funciona nas grandes operações e validando cada
                   decisão no meu próprio negócio, o Tazza. Foi assim que desenvolvi
                   uma estratégia feita para negócios locais de alimentação.
@@ -260,7 +252,7 @@ function App() {
               <span className="eyebrow">Meu método à sua disposição</span>
               <h2>O simples bem feito ainda funciona. E eu vou te mostrar como.</h2>
               <p className="method-lead">
-                Não é sobre complicar. É sobre fazer as pequenas coisas certas —
+                Não é sobre complicar. É sobre fazer as pequenas coisas certas:
                 aquelas que, juntas, geram grandes resultados no seu negócio local.
               </p>
               <p>
@@ -274,7 +266,7 @@ function App() {
                 negócio a outro patamar e se destacar dos demais.
               </p>
               <p className="method-highlight">
-                Vamos achar o que torna o seu negócio único — e mostrar que
+                Vamos achar o que torna o seu negócio único e mostrar que
                 <strong> não existe concorrência</strong> quando você se posiciona
                 da maneira certa.
               </p>
@@ -323,7 +315,7 @@ function App() {
             <SectionHeading
               eyebrow="O que você vai levar"
               title="Um pacote completo para colocar seu negócio à frente do que há de mais novo."
-              description="Minha equipe tech vai te entregar as ferramentas mais vantajosas para você criar conteúdo, ter o seu próprio site delivery, ser encontrado e recomendado no Google — e muito mais. Confira."
+              description="Minha equipe tech vai te entregar as ferramentas mais vantajosas para você criar conteúdo, ter o seu próprio site delivery, ser encontrado e recomendado no Google, e muito mais. Confira."
               center
             />
             <div className="deliverables-stack">
@@ -331,12 +323,12 @@ function App() {
                 const Icon = icons[item.icon]
                 const isAlt = (index - 1) % 2 === 1
                 const isFeature = Boolean(item.featured && item.images?.length)
-                const isAccordion = item.variant === 'accordion' && Boolean(item.accordionItems?.length)
+                const isFeatures = item.variant === 'features' && Boolean(item.featureItems?.length)
 
-                if (isAccordion) {
+                if (isFeatures) {
                   return (
-                    <article className="deliverable-card deliverable-card--accordion reveal" key={item.number}>
-                      <div className="deliverable-accordion-top">
+                    <article className="deliverable-card deliverable-card--features reveal" key={item.number}>
+                      <div className="deliverable-features-top">
                         <div className="deliverable-copy">
                           <span className="epica-kicker">Ferramenta inclusa</span>
                           <h3>
@@ -362,7 +354,7 @@ function App() {
                             ))}
                           </div>
                         </div>
-                        <div className="deliverable-accordion-visual">
+                        <div className="deliverable-features-visual">
                           <img
                             src={item.image}
                             alt={item.imageAlt}
@@ -370,10 +362,7 @@ function App() {
                           />
                         </div>
                       </div>
-                      <BaseEpicaAccordion
-                        items={item.accordionItems!}
-                        defaultOpenId={item.defaultOpenId ?? item.accordionItems![0].id}
-                      />
+                      <BaseEpicaFeatures items={item.featureItems!} />
                     </article>
                   )
                 }
@@ -548,6 +537,8 @@ function App() {
           </div>
         </section>
 
+        <GallerySection />
+
         <section className="benefits-section section-pad" id="beneficios">
           <div className="container">
             <SectionHeading
@@ -629,7 +620,7 @@ function App() {
             <div className="bonus-badge reveal">Bônus incluso</div>
             <SectionHeading
               eyebrow="Gestão financeira na prática"
-              title="Você pode vender mais — e também lucrar melhor com o que já vende."
+              title="Você pode vender mais e também lucrar melhor com o que já vende."
               description="Como bônus da mentoria, você também aprende a olhar os números que mostram se o movimento do negócio está virando dinheiro de verdade."
               light
             />
@@ -747,7 +738,7 @@ function App() {
                 </p>
                 <p className="price-cash">ou <strong>R$ 998</strong> à vista</p>
                 <p className="price-note">
-                  Inclui acesso anual ao grupo de acompanhamento — você fica no grupo por 1 ano.
+                  Inclui acesso anual ao grupo de acompanhamento: você fica no grupo por 1 ano.
                 </p>
                 <CtaLink variant="light">Quero entrar para a próxima turma</CtaLink>
                 <small><CheckCircle2 size={14} />Vagas limitadas para manter qualidade no acompanhamento.</small>

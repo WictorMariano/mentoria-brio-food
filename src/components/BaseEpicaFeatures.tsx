@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import {
-  ChevronDown, Clapperboard, ImagePlus, LayoutTemplate, Library, Play,
+  Clapperboard, ImagePlus, LayoutTemplate, Library, Play,
 } from 'lucide-react'
-import type { DeliverableAccordionItem, DeliverableDemoType } from '../data/content'
+import type { DeliverableFeatureItem, DeliverableDemoType } from '../data/content'
 
 const TEMPLATE_OPTIONS = [
   { id: 'acai', label: 'Promoções', hint: 'Oferta + CTA', image: '/images/base-epica/template-carrossel.png' },
@@ -11,14 +11,17 @@ const TEMPLATE_OPTIONS = [
   { id: 'prova', label: 'Datas Especiais', hint: 'Clientes reais', image: '/images/base-epica/template-datas-especiais.jpg' },
 ]
 
-const ACCORDION_ICONS: Record<DeliverableDemoType, typeof LayoutTemplate> = {
-  carrosseis: LayoutTemplate,
-  aprimoramento: ImagePlus,
-  videos: Clapperboard,
-  biblioteca: Library,
+const FEATURE_META: Record<
+  DeliverableDemoType,
+  { Icon: typeof LayoutTemplate; tone: string }
+> = {
+  carrosseis: { Icon: LayoutTemplate, tone: 'lime' },
+  aprimoramento: { Icon: ImagePlus, tone: 'purple' },
+  videos: { Icon: Clapperboard, tone: 'orange' },
+  biblioteca: { Icon: Library, tone: 'coral' },
 }
 
-function AccordionDemo({ item }: { item: DeliverableAccordionItem }) {
+function FeatureDemo({ item }: { item: DeliverableFeatureItem }) {
   const [activeTemplate, setActiveTemplate] = useState(TEMPLATE_OPTIONS[0].id)
   const selected = TEMPLATE_OPTIONS.find((option) => option.id === activeTemplate) ?? TEMPLATE_OPTIONS[0]
 
@@ -102,74 +105,80 @@ function AccordionDemo({ item }: { item: DeliverableAccordionItem }) {
   }
 
   if (item.demoType === 'videos') {
+    const poster = item.images?.[0]
     return (
       <div className="epica-demo epica-demo--videos">
-        <div className="epica-video-frame">
-          <button type="button" tabIndex={-1} aria-hidden="true">
-            <Play size={28} fill="currentColor" />
-          </button>
-          <div>
-            <strong>Reels do negócio</strong>
-            <p>Roteiro + cena + CTA em poucos cliques</p>
+        <div className="epica-video-split__copy">
+          <strong>Reels, Stories e anúncios prontos</strong>
+          <p>
+            A Base Épica monta vídeos curtos com cara da sua marca: roteiro,
+            cena e CTA para publicar sem travar.
+          </p>
+          <div className="epica-video-chips">
+            <span>Stories</span>
+            <span>Reels</span>
+            <span>Anúncio curto</span>
           </div>
         </div>
-        <div className="epica-video-chips">
-          <span>Stories</span>
-          <span>Reels</span>
-          <span>Anúncio curto</span>
-        </div>
+        <aside className="epica-video-player" aria-hidden="true">
+          <div className="epica-video-player__screen">
+            {poster ? (
+              <img src={poster.src} alt="" loading="lazy" />
+            ) : null}
+            <span className="epica-video-player__play">
+              <Play size={22} fill="currentColor" />
+            </span>
+            <div className="epica-video-player__bar">
+              <span className="epica-video-player__progress" />
+              <small>0:12 / 0:28</small>
+            </div>
+          </div>
+        </aside>
       </div>
     )
   }
 
   return (
     <div className="epica-demo epica-demo--biblioteca">
-      {(item.images ?? []).map((image) => (
-        <figure key={image.src}>
-          <img src={image.src} alt={image.alt} loading="lazy" />
-        </figure>
-      ))}
+      <div className="epica-biblio-marquee" aria-label="Biblioteca de referências em carrossel">
+        <div className="epica-biblio-marquee__track">
+          {[...(item.images ?? []), ...(item.images ?? [])].map((image, index) => (
+            <figure key={`${image.src}-${index}`}>
+              <img src={image.src} alt={image.alt} loading="lazy" />
+            </figure>
+          ))}
+        </div>
+        <div className="epica-biblio-marquee__fade epica-biblio-marquee__fade--left" aria-hidden="true" />
+        <div className="epica-biblio-marquee__fade epica-biblio-marquee__fade--right" aria-hidden="true" />
+      </div>
     </div>
   )
 }
 
-export function BaseEpicaAccordion({
-  items,
-  defaultOpenId,
-}: {
-  items: DeliverableAccordionItem[]
-  defaultOpenId: string
-}) {
-  const [openId, setOpenId] = useState(defaultOpenId)
-
+export function BaseEpicaFeatures({ items }: { items: DeliverableFeatureItem[] }) {
   return (
-    <div className="epica-accordion">
+    <div className="epica-features">
       {items.map((item) => {
-        const isOpen = item.id === openId
-        const Icon = ACCORDION_ICONS[item.demoType]
+        const { Icon, tone } = FEATURE_META[item.demoType]
+        const isHero = item.demoType === 'carrosseis'
         return (
-          <div className={`epica-accordion__item ${isOpen ? 'is-open' : ''}`} key={item.id}>
-            <button
-              type="button"
-              className="epica-accordion__trigger"
-              aria-expanded={isOpen}
-              onClick={() => setOpenId(item.id)}
-            >
-              <span className="epica-accordion__icon" aria-hidden="true">
-                <Icon size={18} />
+          <article
+            className={`epica-feature-card ${isHero ? 'epica-feature-card--hero' : ''}`}
+            key={item.id}
+          >
+            <header className="epica-feature-card__head">
+              <span className={`epica-feature-card__icon epica-feature-card__icon--${tone}`} aria-hidden="true">
+                <Icon size={20} />
               </span>
-              <span className="epica-accordion__copy">
-                <strong>{item.title}</strong>
-                <small>{item.description}</small>
-              </span>
-              <ChevronDown size={18} aria-hidden="true" />
-            </button>
-            {isOpen ? (
-              <div className="epica-accordion__panel">
-                <AccordionDemo item={item} />
+              <div className="epica-feature-card__copy">
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
               </div>
-            ) : null}
-          </div>
+            </header>
+            <div className="epica-feature-card__body">
+              <FeatureDemo item={item} />
+            </div>
+          </article>
         )
       })}
     </div>

@@ -28,7 +28,7 @@ export type DeliverableDemoType =
   | 'videos'
   | 'biblioteca'
 
-export type DeliverableAccordionItem = {
+export type DeliverableFeatureItem = {
   id: string
   title: string
   description: string
@@ -50,9 +50,8 @@ export const deliverables: Array<{
   images?: Array<{ src: string; alt: string }>
   badge?: string
   featured?: boolean
-  variant?: 'split' | 'accordion'
-  accordionItems?: DeliverableAccordionItem[]
-  defaultOpenId?: string
+  variant?: 'split' | 'features'
+  featureItems?: DeliverableFeatureItem[]
   partner?: {
     name: string
     logo: string
@@ -67,7 +66,7 @@ export const deliverables: Array<{
     title: 'Site Cardápio Digital Delivery',
     titleAccent: 'Sem depender de Aplicativos de terceiro.',
     description:
-      'Seu próprio canal de pedidos: site + cardápio digital delivery para vender pelo Instagram, WhatsApp e Google — com mais margem e sem ficar refém de aplicativos de terceiros.',
+      'Seu próprio canal de pedidos: site + cardápio digital delivery para vender pelo Instagram, WhatsApp e Google, com mais margem e sem ficar refém de aplicativos de terceiros.',
     items: ['Site do seu negócio', 'Cardápio digital delivery', 'Pedidos pelo seu canal'],
     featured: true,
     partner: {
@@ -106,13 +105,12 @@ export const deliverables: Array<{
       'Vídeos',
       'Biblioteca',
     ],
-    variant: 'accordion',
-    defaultOpenId: 'carrosseis',
+    variant: 'features',
     logo: '/images/base-epica/logotipo-base-epica.jpg',
     logoAlt: 'Logotipo Base Épica',
     image: '/images/base-epica/dashboard-hero.png',
-    imageAlt: 'Interface da Base Épica — sistema de geração de mídia para redes sociais',
-    accordionItems: [
+    imageAlt: 'Interface da Base Épica: sistema de geração de mídia para redes sociais',
+    featureItems: [
       {
         id: 'carrosseis',
         title: 'Carrosséis automáticos',
@@ -133,11 +131,11 @@ export const deliverables: Array<{
         images: [
           {
             src: '/images/base-epica/gastro-antes.png',
-            alt: 'Antes — foto simples do sanduíche',
+            alt: 'Antes: foto simples do sanduíche',
           },
           {
             src: '/images/base-epica/gastro-depois.png',
-            alt: 'Depois — foto profissional com luz e apetite de anúncio',
+            alt: 'Depois: foto profissional com luz e apetite de anúncio',
           },
         ],
       },
@@ -146,6 +144,12 @@ export const deliverables: Array<{
         title: 'Vídeos para o seu negócio',
         description: 'Gere vídeos curtos alinhados à sua marca para Reels, Stories e anúncios.',
         demoType: 'videos',
+        images: [
+          {
+            src: '/images/base-epica/video-poster-acai.jpg',
+            alt: 'Prévia de vídeo gastronômico: bowl de açaí',
+          },
+        ],
       },
       {
         id: 'biblioteca',
@@ -175,14 +179,14 @@ export const deliverables: Array<{
     icon: 'mapPin',
     title: 'Google Meu Negócio Pro',
     description:
-      'Os participantes recebem suporte para configurar o Google Meu Negócio da forma correta — e serem encontrados com mais facilidade por quem pesquisa perto de você.',
+      'Os participantes recebem suporte para configurar o Google Meu Negócio da forma correta e serem encontrados com mais facilidade por quem pesquisa perto de você.',
     items: [
       'Configuração correta do perfil',
       'Mais chances de ser encontrado no Google',
       'Suporte para deixar sua presença local profissional',
     ],
     image: '/images/google-meu-negocio/cartao-google.png',
-    imageAlt: 'Google Meu Negócio Pro — configuração profissional para ser encontrado',
+    imageAlt: 'Google Meu Negócio Pro: configuração profissional para ser encontrado',
   },
 ]
 
@@ -257,7 +261,7 @@ export const calls = [
     number: '02',
     title: 'Produto campeão e pesquisa',
     description:
-      'Defina produtos com mais potencial de desejo, conteúdo e venda — sem chute e sem moda vazia.',
+      'Defina produtos com mais potencial de desejo, conteúdo e venda, sem chute e sem moda vazia.',
     topics: ['Pesquisa de mercado', 'Produto autoral', 'Oferta e apresentação'],
     task: 'Escolher ou desenvolver um produto com potencial de destaque.',
   },
@@ -347,7 +351,7 @@ export const faqs = [
   {
     question: 'O cardápio digital e a Base Épica estão inclusos?',
     answer:
-      'Sim. A oferta inclui o site cardápio digital delivery e acesso à Base Épica — a ferramenta de geração de mídia para carrosséis, artes, aprimoramento de imagem e vídeos.',
+      'Sim. A oferta inclui o site cardápio digital delivery e acesso à Base Épica, a ferramenta de geração de mídia para carrosséis, artes, aprimoramento de imagem e vídeos.',
   },
   {
     question: 'A mentoria ensina tráfego pago?',
@@ -367,6 +371,6 @@ export const faqs = [
   {
     question: 'Por que entrar agora?',
     answer:
-      'Porque cada semana sem método é mais uma semana improvisando. A próxima turma é limitada para manter qualidade de acompanhamento — e quem entra recebe mentoria + ferramentas + suporte no mesmo pacote.',
+      'Porque cada semana sem método é mais uma semana improvisando. A próxima turma é limitada para manter qualidade de acompanhamento, e quem entra recebe mentoria + ferramentas + suporte no mesmo pacote.',
   },
 ]
