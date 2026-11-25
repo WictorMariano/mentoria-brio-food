@@ -1,8 +1,15 @@
 export const siteConfig = {
+  siteUrl: 'https://mentoria-brio-food.vercel.app',
+  siteName: 'Mentoria BrioFood',
+  title: 'Mentoria BrioFood | Marcas locais que despertam desejo',
+  description:
+    'Transforme seu negócio de alimentação em uma marca local desejada, reconhecida e preparada para vender mais com a Mentoria BrioFood.',
+  ogImage: '/images/gastronomia-briofood.png',
   checkoutUrl: '#inscricao',
   linkedinUrl: 'https://www.linkedin.com/in/celeste-lacerda-b640a719a/',
   instagramUrl: '#',
   supportEmail: 'contato@briofood.com.br',
+  locale: 'pt_BR',
 }
 
 export type IconName =
